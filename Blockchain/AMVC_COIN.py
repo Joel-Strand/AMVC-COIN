@@ -1,7 +1,17 @@
+"""
+AMVC Coin
+@version 1.0.0
+@author Joel Strand
+"""
+
 import datetime
 import hashlib
 import json
-from flask import Flask, jsonify
+import requests
+from flask import Flask, jsonify, request
+from uuid import uuid4
+from urllib.parse import urlparse
+
  
 class Blockchain:
  
@@ -64,7 +74,7 @@ def mine_block():
     proof = blockchain.proof_of_work(previous_proof)
     previous_hash = blockchain.hash(previous_block)
     block = blockchain.create_block(proof, previous_hash)
-    response = {'message': 'Congratulations, you just mined a block!',
+    response = {'message': 'Block Mined.',
                 'index': block['index'],
                 'timestamp': block['timestamp'],
                 'proof': block['proof'],
